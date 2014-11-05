@@ -1,0 +1,160 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<configurationDescriptor version="95">
+  <logicalFolder name="root" displayName="root" projectFiles="true" kind="ROOT">
+    <logicalFolder name="HeaderFiles"
+                   displayName="Header Files"
+                   projectFiles="true">
+    </logicalFolder>
+    <logicalFolder name="ResourceFiles"
+                   displayName="Resource Files"
+                   projectFiles="true">
+    </logicalFolder>
+    <logicalFolder name="SourceFiles"
+                   displayName="Source Files"
+                   projectFiles="true">
+      <logicalFolder name="f2" displayName="FloydWarshall" projectFiles="true">
+        <itemPath>FloydWarshall.c</itemPath>
+        <itemPath>FloydWarshall.h</itemPath>
+      </logicalFolder>
+      <logicalFolder name="f4" displayName="FloydWarshallFile" projectFiles="true">
+        <itemPath>FloydWarshallFile.c</itemPath>
+        <itemPath>FloydWarshallFile.h</itemPath>
+      </logicalFolder>
+      <logicalFolder name="f3" displayName="Queue" projectFiles="true">
+      </logicalFolder>
+      <logicalFolder name="f1" displayName="Stack" projectFiles="true">
+        <itemPath>Stack.c</itemPath>
+        <itemPath>Stack.h</itemPath>
+      </logicalFolder>
+      <itemPath>TesMacros.h</itemPath>
+      <itemPath>main.c</itemPath>
+    </logicalFolder>
+    <logicalFolder name="TestFiles"
+                   displayName="Test Files"
+                   projectFiles="false"
+                   kind="TEST_LOGICAL_FOLDER">
+      <logicalFolder name="f1"
+                     displayName="FloydWarshallFile Tests"
+                     projectFiles="true"
+                     kind="TEST">
+        <itemPath>tests/TestFloydWarshallFile.c</itemPath>
+        <itemPath>tests/test-load.grh</itemPath>
+      </logicalFolder>
+    </logicalFolder>
+    <logicalFolder name="ExternalFiles"
+                   displayName="Important Files"
+                   projectFiles="false"
+                   kind="IMPORTANT_FILES_FOLDER">
+      <itemPath>.gitignore</itemPath>
+      <itemPath>Makefile</itemPath>
+    </logicalFolder>
+  </logicalFolder>
+  <projectmakefile>Makefile</projectmakefile>
+  <confs>
+    <conf name="Debug" type="1">
+      <toolsSet>
+        <compilerSet>default</compilerSet>
+        <dependencyChecking>true</dependencyChecking>
+        <rebuildPropChanged>false</rebuildPropChanged>
+      </toolsSet>
+      <compileType>
+        <cTool>
+          <standard>10</standard>
+          <commandLine>-Wall -Wextra -Wpedantic</commandLine>
+          <warningLevel>3</warningLevel>
+        </cTool>
+      </compileType>
+      <item path="FloydWarshall.c" ex="false" tool="0" flavor2="0">
+      </item>
+      <item path="FloydWarshall.h" ex="false" tool="3" flavor2="0">
+      </item>
+      <item path="FloydWarshallFile.c" ex="false" tool="0" flavor2="0">
+      </item>
+      <item path="FloydWarshallFile.h" ex="false" tool="3" flavor2="0">
+      </item>
+      <item path="Stack.c" ex="false" tool="0" flavor2="0">
+      </item>
+      <item path="Stack.h" ex="false" tool="3" flavor2="0">
+      </item>
+      <item path="TesMacros.h" ex="false" tool="3" flavor2="0">
+      </item>
+      <folder path="TestFiles/f1">
+        <cTool>
+          <incDir>
+            <pElem>.</pElem>
+          </incDir>
+        </cTool>
+        <ccTool>
+          <incDir>
+            <pElem>.</pElem>
+          </incDir>
+        </ccTool>
+        <linkerTool>
+          <output>${TESTDIR}/TestFiles/f1</output>
+        </linkerTool>
+      </folder>
+      <item path="main.c" ex="false" tool="0" flavor2="0">
+      </item>
+      <item path="tests/TestFloydWarshallFile.c" ex="false" tool="0" flavor2="0">
+      </item>
+      <item path="tests/test-load.grh" ex="false" tool="3" flavor2="0">
+      </item>
+    </conf>
+    <conf name="Release" type="1">
+      <toolsSet>
+        <compilerSet>default</compilerSet>
+        <dependencyChecking>true</dependencyChecking>
+        <rebuildPropChanged>false</rebuildPropChanged>
+      </toolsSet>
+      <compileType>
+        <cTool>
+          <developmentMode>5</developmentMode>
+        </cTool>
+        <ccTool>
+          <developmentMode>5</developmentMode>
+        </ccTool>
+        <fortranCompilerTool>
+          <developmentMode>5</developmentMode>
+        </fortranCompilerTool>
+        <asmTool>
+          <developmentMode>5</developmentMode>
+        </asmTool>
+      </compileType>
+      <item path="FloydWarshall.c" ex="false" tool="0" flavor2="0">
+      </item>
+      <item path="FloydWarshall.h" ex="false" tool="3" flavor2="0">
+      </item>
+      <item path="FloydWarshallFile.c" ex="false" tool="0" flavor2="0">
+      </item>
+      <item path="FloydWarshallFile.h" ex="false" tool="3" flavor2="0">
+      </item>
+      <item path="Stack.c" ex="false" tool="0" flavor2="0">
+      </item>
+      <item path="Stack.h" ex="false" tool="3" flavor2="0">
+      </item>
+      <item path="TesMacros.h" ex="false" tool="3" flavor2="0">
+      </item>
+      <folder path="TestFiles/f1">
+        <cTool>
+          <incDir>
+            <pElem>.</pElem>
+          </incDir>
+        </cTool>
+        <ccTool>
+          <incDir>
+            <pElem>.</pElem>
+          </incDir>
+        </ccTool>
+        <linkerTool>
+          <output>${TESTDIR}/TestFiles/f1</output>
+        </linkerTool>
+      </folder>
+      <item path="main.c" ex="false" tool="0" flavor2="0">
+      </item>
+      <item path="tests/TestFloydWarshallFile.c" ex="false" tool="0" flavor2="0">
+      </item>
+      <item path="tests/test-load.grh" ex="false" tool="3" flavor2="0">
+      </item>
+    </conf>
+  </confs>
+</configurationDescriptor>

@@ -4,7 +4,7 @@
 #include "TesMacros.h"
 #include "FloydWarshallFile.h"
 
-TEST_INIT("FloydWarshallFile Tests");
+TEST_INIT("FloydWarshallFile Tests")
 
 void Test_FloydWarshallFile_Load() {
 
@@ -13,6 +13,7 @@ void Test_FloydWarshallFile_Load() {
     TEST_ASSERT(data);
     TEST_ASSERT(fw_size(data) == 6)
 
+    TEST_ASSERT(fw_get_dist(data, 0, 5) == INFINITY_GRAPH_DISTANCE);
     TEST_ASSERT(fw_get_dist(data, 0, 1) == 1);
     TEST_ASSERT(fw_get_dist(data, 1, 0) == 2);
     TEST_ASSERT(fw_get_dist(data, 1, 2) == 3);
@@ -22,6 +23,7 @@ void Test_FloydWarshallFile_Load() {
     TEST_ASSERT(fw_get_dist(data, 2, 4) == 7);
     TEST_ASSERT(fw_get_dist(data, 3, 5) == 9);
 
+    TEST_ASSERT(fw_get_next(data, 0, 5) == UNDEFINED_GRAPH_NODE);
     TEST_ASSERT(fw_get_next(data, 0, 1) == 1);
     TEST_ASSERT(fw_get_next(data, 1, 0) == 0);
     TEST_ASSERT(fw_get_next(data, 1, 2) == 2);
@@ -32,8 +34,8 @@ void Test_FloydWarshallFile_Load() {
     TEST_ASSERT(fw_get_next(data, 3, 5) == 5);
 }
 
-TEST_BEGIN;
+TEST_BEGIN
 
-TEST(Test_FloydWarshallFile_Load);
+TEST(Test_FloydWarshallFile_Load)
 
-TEST_END;
+TEST_END

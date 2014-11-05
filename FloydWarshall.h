@@ -14,7 +14,7 @@ extern "C" {
 
     typedef struct FloydWarshallData * PFloydWarshallData;
     typedef unsigned GraphNode;
-    typedef unsigned GraphDistance;
+    typedef int GraphDistance;
     typedef size_t GraphSize;
 
     PFloydWarshallData fw_create(

@@ -7,7 +7,7 @@
 #define TEST_BEGIN \
     int main() { \
     printf("\n%%SUITE_STARTING%% %s\n", __testSuiteName); \
-    printf("%%SUITE_STARTED%%\n")
+    printf("%%SUITE_STARTED%%\n");
 
 #define TEST_END printf("\n%%SUITE_FINISHED%% time=0\n"); \
     }
@@ -16,11 +16,11 @@
     printf("\n%%TEST_STARTED%% "#test" (%s)\n", __testSuiteName); \
     __testName = #test; \
     test(); \
-    printf("%%TEST_FINISHED%% time=0 "#test" (%s) \n", __testSuiteName)
+    printf("%%TEST_FINISHED%% time=0 "#test" (%s) \n", __testSuiteName);
 
 #define TEST_FAIL(message) \
     printf("%%TEST_FAILED%% time=0 testname=%s (%s) message=%s\n", \
-        __testName ,__testSuiteName, message)
+        __testName ,__testSuiteName, message);
 
 #define TEST_ASSERT(assert) \
     if(!(assert)) { TEST_FAIL(#assert); }

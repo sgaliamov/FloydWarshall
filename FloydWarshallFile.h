@@ -7,6 +7,8 @@
 extern "C" {
 #endif
 
+    extern const GraphNode UNDEFINED_GRAPH_NODE;
+    extern const GraphDistance INFINITY_GRAPH_DISTANCE;
 
     PFloydWarshallData fw_load(const char * const path);
 

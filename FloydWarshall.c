@@ -1,6 +1,10 @@
 #include <stdlib.h>
+#include <limits.h>
 #include <assert.h>
 #include "FloydWarshall.h"
+
+const GraphNode UNDEFINED_GRAPH_NODE = UINT_MAX;
+const GraphDistance INFINITY_GRAPH_DISTANCE = INT_MAX;
 
 typedef struct FloydWarshallData {
     GraphDistance **dist;
@@ -17,6 +21,11 @@ PFloydWarshallData _fw_create(const GraphSize size) {
     for (GraphSize i = 0; i < size; i++) {
         data->dist[i] = calloc(size, sizeof (GraphDistance));
         data->next[i] = calloc(size, sizeof (GraphNode));
+
+        for (GraphSize j = 0; j < size; j++) {
+            data->dist[i][j] = INFINITY_GRAPH_DISTANCE;
+            data->next[i][j] = UNDEFINED_GRAPH_NODE;
+        }
     }
 
     return data;
@@ -40,6 +49,10 @@ PFloydWarshallData fw_create(
         GraphNode from = pFrom[i];
         GraphNode to = pTo[i];
         GraphDistance dist = pDist[i];
+
+        assert(from != UNDEFINED_GRAPH_NODE);
+        assert(to != UNDEFINED_GRAPH_NODE);
+        assert(dist != INFINITY_GRAPH_DISTANCE);
 
         data->next[from][to] = to;
         data->dist[from][to] = dist;

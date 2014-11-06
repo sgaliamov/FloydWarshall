@@ -12,7 +12,7 @@ typedef struct FloydWarshallData {
     GraphSize size;
 } * PFloydWarshallData;
 
-PFloydWarshallData _fw_create(const GraphSize size) {
+static PFloydWarshallData _fw_create(const GraphSize size) {
     PFloydWarshallData data = malloc(sizeof (struct FloydWarshallData));
     data->size = size;
     data->dist = malloc(size * sizeof (GraphDistance*));
@@ -77,8 +77,41 @@ void fw_free(PFloydWarshallData * const ppData) {
     *ppData = NULL;
 }
 
+inline static GraphDistance _summ(GraphDistance a, GraphDistance b) {
+    if (a == INFINITY_GRAPH_DISTANCE || b == INFINITY_GRAPH_DISTANCE) {
+        return INFINITY_GRAPH_DISTANCE;
+    } else if (a == -INFINITY_GRAPH_DISTANCE || b == -INFINITY_GRAPH_DISTANCE) {
+        return -INFINITY_GRAPH_DISTANCE;
+    }
+
+    long c = (long) a + b;
+    if (c > INFINITY_GRAPH_DISTANCE) {
+        c = INFINITY_GRAPH_DISTANCE;
+    } else if (c <-INFINITY_GRAPH_DISTANCE) {
+        c = -INFINITY_GRAPH_DISTANCE;
+    }
+
+    return (GraphDistance) c;
+}
+
 void fw_build(const PFloydWarshallData data) {
     assert(data);
+
+    GraphDistance * const * const dist = data->dist;
+    GraphNode * const * const next = data->next;
+
+    for (GraphSize k = 0; k < data->size; k++) {
+        for (GraphSize i = 0; i < data->size; i++) {
+            for (GraphSize j = 0; j < data->size; j++) {
+
+                const GraphDistance val = _summ(dist[i][k], dist[k][j]);
+                if (dist[i][j] > val) {
+                    dist[i][j] = val;
+                    next[i][j] = next[i][k];
+                }
+            }
+        }
+    }
 
     free(data);
 }

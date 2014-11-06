@@ -52,7 +52,8 @@ PFloydWarshallData fw_create(
 
         assert(from != UNDEFINED_GRAPH_NODE);
         assert(to != UNDEFINED_GRAPH_NODE);
-        assert(dist != INFINITY_GRAPH_DISTANCE);
+        assert(dist < INFINITY_GRAPH_DISTANCE);
+        assert(dist > -INFINITY_GRAPH_DISTANCE);
 
         data->next[from][to] = to;
         data->dist[from][to] = dist;
@@ -112,8 +113,6 @@ void fw_build(const PFloydWarshallData data) {
             }
         }
     }
-
-    free(data);
 }
 
 GraphSize fw_size(const PFloydWarshallData data) {
@@ -124,12 +123,16 @@ GraphSize fw_size(const PFloydWarshallData data) {
 
 GraphNode fw_get_next(const PFloydWarshallData data, const GraphNode from, const GraphNode to) {
     assert(data);
+    assert(data->size > from);
+    assert(data->size > to);
 
     return data->next[from][to];
 }
 
 GraphDistance fw_get_dist(const PFloydWarshallData data, const GraphNode from, const GraphNode to) {
     assert(data);
+    assert(data->size > from);
+    assert(data->size > to);
 
     return data->dist[from][to];
 }

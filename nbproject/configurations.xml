@@ -33,6 +33,14 @@
                    displayName="Test Files"
                    projectFiles="false"
                    kind="TEST_LOGICAL_FOLDER">
+      <logicalFolder name="f2"
+                     displayName="FloydWarshall Test"
+                     projectFiles="true"
+                     kind="TEST">
+        <itemPath>tests/TestFloydWarshall.c</itemPath>
+        <itemPath>tests/test-build-infinity.grh</itemPath>
+        <itemPath>tests/test-build.grh</itemPath>
+      </logicalFolder>
       <logicalFolder name="f1"
                      displayName="FloydWarshallFile Tests"
                      projectFiles="true"
@@ -93,9 +101,30 @@
           <output>${TESTDIR}/TestFiles/f1</output>
         </linkerTool>
       </folder>
+      <folder path="TestFiles/f2">
+        <cTool>
+          <incDir>
+            <pElem>.</pElem>
+          </incDir>
+        </cTool>
+        <ccTool>
+          <incDir>
+            <pElem>.</pElem>
+          </incDir>
+        </ccTool>
+        <linkerTool>
+          <output>${TESTDIR}/TestFiles/f2</output>
+        </linkerTool>
+      </folder>
       <item path="main.c" ex="false" tool="0" flavor2="0">
       </item>
+      <item path="tests/TestFloydWarshall.c" ex="false" tool="0" flavor2="0">
+      </item>
       <item path="tests/TestFloydWarshallFile.c" ex="false" tool="0" flavor2="0">
+      </item>
+      <item path="tests/test-build-infinity.grh" ex="false" tool="3" flavor2="0">
+      </item>
+      <item path="tests/test-build.grh" ex="false" tool="3" flavor2="0">
       </item>
       <item path="tests/test-load.grh" ex="false" tool="3" flavor2="0">
       </item>
@@ -149,9 +178,30 @@
           <output>${TESTDIR}/TestFiles/f1</output>
         </linkerTool>
       </folder>
+      <folder path="TestFiles/f2">
+        <cTool>
+          <incDir>
+            <pElem>.</pElem>
+          </incDir>
+        </cTool>
+        <ccTool>
+          <incDir>
+            <pElem>.</pElem>
+          </incDir>
+        </ccTool>
+        <linkerTool>
+          <output>${TESTDIR}/TestFiles/f2</output>
+        </linkerTool>
+      </folder>
       <item path="main.c" ex="false" tool="0" flavor2="0">
       </item>
+      <item path="tests/TestFloydWarshall.c" ex="false" tool="0" flavor2="0">
+      </item>
       <item path="tests/TestFloydWarshallFile.c" ex="false" tool="0" flavor2="0">
+      </item>
+      <item path="tests/test-build-infinity.grh" ex="false" tool="3" flavor2="0">
+      </item>
+      <item path="tests/test-build.grh" ex="false" tool="3" flavor2="0">
       </item>
       <item path="tests/test-load.grh" ex="false" tool="3" flavor2="0">
       </item>

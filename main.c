@@ -11,7 +11,7 @@ int main(int argc, char** argv) {
         return (EXIT_FAILURE);
     }
 
-    PFloydWarshallData data __attribute__((cleanup(fw_free))) = fw_load(argv[1]);
+    PFloydWarshallData data __attribute__((cleanup(fw_free))) = fw_load_graph(argv[1]);
     
     fw_build(data);
     

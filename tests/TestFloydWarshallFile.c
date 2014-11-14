@@ -1,4 +1,5 @@
 #include <stdio.h>
+#include <unistd.h>
 #include <stdlib.h>
 
 #include "TesMacros.h"
@@ -8,7 +9,7 @@ TEST_INIT("FloydWarshallFile Tests")
 
 void Test_FloydWarshallFile_Load() {
 
-    PFloydWarshallData data = fw_load("A:/Projects/CLang/FloydWarshall/tests/test-load.grh");
+    PFloydWarshallData data = fw_load_graph("A:/Projects/CLang/FloydWarshall/tests/test-load.grh");
 
     TEST_ASSERT(data);
     TEST_ASSERT(fw_size(data) == 6)
@@ -34,8 +35,15 @@ void Test_FloydWarshallFile_Load() {
     TEST_ASSERT(fw_get_next(data, 3, 5) == 5);
 }
 
+void Test_FloydWarshallFile_SaveMatrix() {
+    PFloydWarshallData data = fw_load_graph("tests/test-load.grh");
+
+    fw_save_matix(data, "tests/test-load.gmx");
+}
+
 TEST_BEGIN
 
 TEST(Test_FloydWarshallFile_Load)
+TEST(Test_FloydWarshallFile_SaveMatrix)
 
 TEST_END

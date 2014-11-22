@@ -8,7 +8,7 @@ TEST_INIT("FloydWarshall Tests")
 
 void Test_FloydWarshall_Build() {
 
-    PFloydWarshallData data = fw_load_graph("A:/Projects/CLang/FloydWarshall/tests/test-build.grh");
+    PFloydWarshallData data = fw_load_graph("tests/test-build.grh");
 
     fw_build(data);
     
@@ -20,9 +20,10 @@ void Test_FloydWarshall_Build() {
 
 void Test_FloydWarshall_Build_Infinity() {
 
-    PFloydWarshallData data = fw_load_graph("A:/Projects/CLang/FloydWarshall/tests/test-build-infinity.grh");
-
+    PFloydWarshallData data = fw_load_graph("tests/test-build-infinity.grh");
     fw_build(data);
+    
+    fw_save_matix(data, "build/tests/test-build-infinity.gmx");
     
     TEST_ASSERT(fw_get_next(data, 0, 4) == 2);
     TEST_ASSERT(fw_get_next(data, 2, 4) == 4);

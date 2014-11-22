@@ -8,7 +8,6 @@
 TEST_INIT("FloydWarshallFile Tests")
 
 void Test_FloydWarshallFile_Load() {
-
     PFloydWarshallData data = fw_load_graph("tests/test-load.grh");
 
     TEST_ASSERT(data);
@@ -36,8 +35,9 @@ void Test_FloydWarshallFile_Load() {
 }
 
 void Test_FloydWarshallFile_SaveMatrix() {
-    PFloydWarshallData data = fw_load_graph("tests/test-load.grh");
-
+    PFloydWarshallData data = fw_load_graph("tests/test-load.grh");    
+    fw_build(data);
+    
     fw_save_matix(data, "build/tests/test-load.gmx");
 }
 

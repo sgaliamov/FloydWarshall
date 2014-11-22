@@ -14,8 +14,8 @@ typedef struct Stack {
     size_t count;
 } * PStack;
 
-PStack stack_create() {
-    const PStack stack = calloc(1, sizeof (struct Stack));
+PStack stack_new(void) {
+     const PStack stack = calloc(1, sizeof (struct Stack));
 
     stack_set_capacity(stack, DefaultCapacity);
 
@@ -33,7 +33,7 @@ void stack_free(PStack * const ppStack) {
     *ppStack = NULL;
 }
 
-size_t stack_count(const PStack stack) {
+size_t stack_get_count(const PStack stack) {
     assert(stack);
 
     return stack->count;

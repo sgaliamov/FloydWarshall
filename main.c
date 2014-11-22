@@ -15,7 +15,6 @@ int main(int argc, char** argv) {
     
     fw_build(data);
     
-    
-    return (EXIT_SUCCESS);
+    return EXIT_SUCCESS;
 }
 

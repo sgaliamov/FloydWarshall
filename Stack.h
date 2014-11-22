@@ -15,10 +15,10 @@ extern "C" {
     typedef struct Stack * PStack;
     typedef void * StackItem;
 
-    PStack stack_create();
+    PStack stack_new(void);
     void stack_free(PStack * const stack);
 
-    size_t stack_count(const PStack);
+    size_t stack_get_count(const PStack);
     void stack_set_capacity(const PStack, const size_t);
     size_t stack_get_capacity(const PStack);
     StackItem stack_pop(const PStack);

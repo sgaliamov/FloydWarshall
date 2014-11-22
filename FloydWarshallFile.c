@@ -21,9 +21,9 @@ inline static void _close_file(FILE * * const file) {
 PFloydWarshallData fw_load_graph(const char * const path) {
     assert(path);
 
-    PStack stackFrom __attribute__((cleanup(stack_free))) = stack_create();
-    PStack stackTo __attribute__((cleanup(stack_free))) = stack_create();
-    PStack stackDist __attribute__((cleanup(stack_free))) = stack_create();
+    PStack stackFrom __attribute__((cleanup(stack_free))) = stack_new();
+    PStack stackTo __attribute__((cleanup(stack_free))) = stack_new();
+    PStack stackDist __attribute__((cleanup(stack_free))) = stack_new();
     FILE * pFile __attribute__((cleanup(_close_file))) = fopen(path, "r");
     assert(pFile);
 
@@ -47,7 +47,7 @@ PFloydWarshallData fw_load_graph(const char * const path) {
     const GraphNodeType * const pFrom = (const GraphNodeType * const) stack_to_array(stackFrom);
     const GraphNodeType * const pTo = (const GraphNodeType * const) stack_to_array(stackTo);
     const GraphDistance * const pDist = (const GraphDistance * const) stack_to_array(stackDist);
-    size_t length = stack_count(stackFrom);
+    size_t length = stack_get_count(stackFrom);
 
     return fw_create(max + 1, length, pFrom, pTo, pDist);
 }

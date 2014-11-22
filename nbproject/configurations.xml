@@ -36,6 +36,7 @@
                      projectFiles="true"
                      kind="TEST">
         <itemPath>tests/TestFloydWarshall.c</itemPath>
+        <itemPath>tests/test-build.grh</itemPath>
         <itemPath>tests/test-simple-infinity.grh</itemPath>
         <itemPath>tests/test-simple.grh</itemPath>
       </logicalFolder>
@@ -154,6 +155,8 @@
       </item>
       <item path="tests/TestStack.c" ex="false" tool="0" flavor2="0">
       </item>
+      <item path="tests/test-build.grh" ex="false" tool="3" flavor2="0">
+      </item>
       <item path="tests/test-load.grh" ex="false" tool="3" flavor2="0">
       </item>
       <item path="tests/test-simple-infinity.grh" ex="false" tool="3" flavor2="0">
@@ -256,6 +259,8 @@
       <item path="tests/TestFloydWarshallFile.c" ex="false" tool="0" flavor2="0">
       </item>
       <item path="tests/TestStack.c" ex="false" tool="0" flavor2="0">
+      </item>
+      <item path="tests/test-build.grh" ex="false" tool="3" flavor2="0">
       </item>
       <item path="tests/test-load.grh" ex="false" tool="3" flavor2="0">
       </item>

@@ -18,12 +18,17 @@ inline static void _close_file(FILE * * const file) {
     *file = NULL;
 }
 
+inline static void _stack_free(PStack * const stack) {
+    Stack()->free(*stack);
+    *stack = NULL;
+}
+
 PFloydWarshallData fw_load_graph(const char * const path) {
     assert(path);
 
-    PStack stackFrom __attribute__((cleanup(stack_free))) = stack_new();
-    PStack stackTo __attribute__((cleanup(stack_free))) = stack_new();
-    PStack stackDist __attribute__((cleanup(stack_free))) = stack_new();
+    PStack stackFrom __attribute__((cleanup(_stack_free))) = Stack()->new();
+    PStack stackTo __attribute__((cleanup(_stack_free))) = Stack()->new();
+    PStack stackDist __attribute__((cleanup(_stack_free))) = Stack()->new();
     FILE * pFile __attribute__((cleanup(_close_file))) = fopen(path, "r");
     assert(pFile);
 
@@ -38,16 +43,16 @@ PFloydWarshallData fw_load_graph(const char * const path) {
         sscanf(line, "%u\t%u\t%i", (unsigned*) &from, (unsigned*) &to, (int*) &distance);
         memset(line, 0, BUFFER_SIZE);
 
-        stack_push(stackFrom, (StackItem) from);
-        stack_push(stackTo, (StackItem) to);
-        stack_push(stackDist, (StackItem) distance);
+        Stack()->push(stackFrom, (StackItem) from);
+        Stack()->push(stackTo, (StackItem) to);
+        Stack()->push(stackDist, (StackItem) distance);
         max = _max(max, _max(from, to));
     }
 
-    const GraphNodeType * const pFrom = (const GraphNodeType * const) stack_to_array(stackFrom);
-    const GraphNodeType * const pTo = (const GraphNodeType * const) stack_to_array(stackTo);
-    const GraphDistance * const pDist = (const GraphDistance * const) stack_to_array(stackDist);
-    size_t length = stack_get_count(stackFrom);
+    const GraphNodeType * const pFrom = (const GraphNodeType * const) Stack()->to_array(stackFrom);
+    const GraphNodeType * const pTo = (const GraphNodeType * const) Stack()->to_array(stackTo);
+    const GraphDistance * const pDist = (const GraphDistance * const) Stack()->to_array(stackDist);
+    size_t length = Stack()->get_count(stackFrom);
 
     return fw_create(max + 1, length, pFrom, pTo, pDist);
 }

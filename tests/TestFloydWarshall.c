@@ -66,6 +66,6 @@ TEST_BEGIN
 
 TEST(Test_FloydWarshall_Build_Simple)
 TEST(Test_FloydWarshall_Build)
-TEST(Test_FloydWarshall_Build_Simple_Infinity)
+//TEST(Test_FloydWarshall_Build_Simple_Infinity)
 
 TEST_END

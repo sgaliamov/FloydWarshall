@@ -8,97 +8,97 @@ TEST_INIT("Stack Tests")
 
 void Test_Stack_PushPop() {
     const unsigned count = 5;
-    PStack stack = stack_new();
-    stack_set_capacity(stack, count);
+    PStack stack = Stack()->new();
+    Stack()->set_capacity(stack, count);
 
     for (unsigned i = 0; i < count; i++) {
-        stack_push(stack, (StackItem) i);
+        Stack()->push(stack, (StackItem) i);
     }
 
-    TEST_ASSERT(stack_get_count(stack) == count)
+    TEST_ASSERT(Stack()->get_count(stack) == count)
 
     for (unsigned i = 1; i <= count; i++) {
-        unsigned item = (unsigned) stack_pop(stack);
+        unsigned item = (unsigned) Stack()->pop(stack);
         TEST_ASSERT(item == (count - i));
     }
 
-    stack_free(&stack);
+    Stack()->free(stack);
 }
 
 void Test_Stack_IncreaseCapacity() {
-    PStack stack = stack_new();
-    stack_set_capacity(stack, 3);
+    PStack stack = Stack()->new();
+    Stack()->set_capacity(stack, 3);
     unsigned counter = 0;
 
     for (unsigned i = 0; i < 3; i++) {
-        stack_push(stack, (StackItem) counter++);
+        Stack()->push(stack, (StackItem) counter++);
     }
-    TEST_ASSERT(stack_get_capacity(stack) == 3);
+    TEST_ASSERT(Stack()->get_capacity(stack) == 3);
 
-    stack_push(stack, (StackItem) counter++);
-    TEST_ASSERT(stack_get_capacity(stack) == 6);
+    Stack()->push(stack, (StackItem) counter++);
+    TEST_ASSERT(Stack()->get_capacity(stack) == 6);
 
     for (unsigned i = 0; i < 5; i++) {
-        stack_push(stack, (StackItem) counter++);
+        Stack()->push(stack, (StackItem) counter++);
     }
-    TEST_ASSERT(stack_get_capacity(stack) == 12);
+    TEST_ASSERT(Stack()->get_capacity(stack) == 12);
 
-    while (stack_get_count(stack)) {
-        unsigned item = (unsigned) stack_pop(stack);
+    while (Stack()->get_count(stack)) {
+        unsigned item = (unsigned) Stack()->pop(stack);
         TEST_ASSERT(item == --counter);
     }
 
     TEST_ASSERT(counter == 0);
 
-    stack_free(&stack);
+    Stack()->free(stack);
 }
 
 void Test_Stack_DecreaseCapacity() {
-    PStack stack = stack_new();
-    stack_set_capacity(stack, 13);
+    PStack stack = Stack()->new();
+    Stack()->set_capacity(stack, 13);
 
-    stack_pop(stack);
-    TEST_ASSERT(stack_get_capacity(stack) == 6);
+    Stack()->pop(stack);
+    TEST_ASSERT(Stack()->get_capacity(stack) == 6);
 
-    stack_pop(stack);
-    TEST_ASSERT(stack_get_capacity(stack) == 3);
+    Stack()->pop(stack);
+    TEST_ASSERT(Stack()->get_capacity(stack) == 3);
 
-    stack_pop(stack);
-    TEST_ASSERT(stack_get_capacity(stack) == 1);
+    Stack()->pop(stack);
+    TEST_ASSERT(Stack()->get_capacity(stack) == 1);
 
-    stack_pop(stack);
-    TEST_ASSERT(stack_get_capacity(stack) == 1);
+    Stack()->pop(stack);
+    TEST_ASSERT(Stack()->get_capacity(stack) == 1);
 
-    stack_free(&stack);
+    Stack()->free(stack);
 }
 
 void Test_Stack_PopOnEmpty() {
-    PStack stack = stack_new();
-    stack_set_capacity(stack, 1);
+    PStack stack = Stack()->new();
+    Stack()->set_capacity(stack, 1);
 
-    StackItem item = stack_pop(stack);
+    StackItem item = Stack()->pop(stack);
 
-    TEST_ASSERT(stack_get_capacity(stack));
+    TEST_ASSERT(Stack()->get_capacity(stack));
     TEST_ASSERT(item == NULL);
 
-    stack_free(&stack);
+    Stack()->free(stack);
 }
 
 void Test_Stack_Empty() {
-    PStack stack = stack_new();
-    stack_set_capacity(stack, 10);
+    PStack stack = Stack()->new();
+    Stack()->set_capacity(stack, 10);
 
-    TEST_ASSERT(stack_get_count(stack) == 0);
+    TEST_ASSERT(Stack()->get_count(stack) == 0);
 
-    stack_push(stack, NULL);
+    Stack()->push(stack, NULL);
 
-    TEST_ASSERT(stack_get_count(stack) != 0);
+    TEST_ASSERT(Stack()->get_count(stack) != 0);
 
-    stack_pop(stack);
+    Stack()->pop(stack);
 
-    TEST_ASSERT(stack_get_count(stack) == 0);
+    TEST_ASSERT(Stack()->get_count(stack) == 0);
 
-    stack_free(&stack);
+    Stack()->free(stack);
 }
 
 TEST_BEGIN

@@ -63,19 +63,11 @@ static void _node_to_string(const GraphNodeType * const node, char * const buffe
 
 static void _distance_to_string(const GraphDistance * const dist, char * const buffer_out) {
     memset(buffer_out, 0, BUFFER_SIZE);
-    if (*dist >= INFINITY_GRAPH_DISTANCE || *dist <= INFINITY_GRAPH_DISTANCE) {
+    if (*dist >= INFINITY_GRAPH_DISTANCE || *dist <= -INFINITY_GRAPH_DISTANCE) {
         sprintf(buffer_out, "(%s)", NAN_STRING);
     } else {
         sprintf(buffer_out, "(%i)", *dist);
     }
-}
-
-void _print_head(FILE * const file, const GraphNodeType size) {
-    fprintf(file, "%9s", " ");
-    for (GraphNodeType c = 0; c < size; c++) {
-        fprintf(file, "%16X", c);
-    }
-    fputc('\n', file);
 }
 
 void fw_save_matix(PFloydWarshallData data, const char * const path) {
@@ -87,18 +79,14 @@ void fw_save_matix(PFloydWarshallData data, const char * const path) {
     GraphNodeType size = fw_size(data);
     assert(size);
 
-    _print_head(file, size);
-
+    char nodeString[BUFFER_SIZE];
+    char distString[BUFFER_SIZE];
     for (GraphNodeType r = 0; r < size; r++) {
-        fprintf(file, "%8X:", r);
         for (GraphNodeType c = 0; c < size; c++) {
             GraphNodeType next = fw_get_next(data, r, c);
             GraphDistance dist = fw_get_dist(data, r, c);
 
-            char nodeString[BUFFER_SIZE];
             _node_to_string(&next, nodeString);
-
-            char distString[BUFFER_SIZE];
             _distance_to_string(&dist, distString);
 
             fprintf(file, "%8s%8s", nodeString, distString);

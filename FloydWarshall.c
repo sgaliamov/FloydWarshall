@@ -26,7 +26,7 @@ static PFloydWarshallData _fw_create(const GraphNodeType size) {
 
         for (GraphNodeType j = 0; j < size; j++) {
             data->dist[i][j] = i == j ? 0 : INFINITY_GRAPH_DISTANCE;
-            data->next[i][j] = UNDEFINED_GRAPH_NODE;
+            data->next[i][j] = i == j ? 0 : UNDEFINED_GRAPH_NODE;
         }
     }
 

@@ -5,7 +5,7 @@
 #include "TesMacros.h"
 #include "FloydWarshallFile.h"
 
-TEST_INIT("FloydWarshallFile Tests")
+TEST_INIT("FloydWarshall File Tests")
 
 void Test_FloydWarshallFile_Load() {
     PFloydWarshallData data = fw_load_graph("tests/test-load.grh");
@@ -32,13 +32,15 @@ void Test_FloydWarshallFile_Load() {
     TEST_ASSERT(fw_get_next(data, 2, 3) == 3);
     TEST_ASSERT(fw_get_next(data, 2, 4) == 4);
     TEST_ASSERT(fw_get_next(data, 3, 5) == 5);
+    
+    fw_save_matix(data, "build/tests/test-load.gmx");
 }
 
 void Test_FloydWarshallFile_SaveMatrix() {
     PFloydWarshallData data = fw_load_graph("tests/test-load.grh");    
     fw_build(data);
     
-    fw_save_matix(data, "build/tests/test-load.gmx");
+    fw_save_matix(data, "build/tests/test-load-and-build.gmx");
 }
 
 TEST_BEGIN

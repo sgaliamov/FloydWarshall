@@ -9,9 +9,10 @@ static const size_t MinCapacity = 1;
 static const size_t DefaultCapacity = 256;
 
 typedef struct stack_t {
-    StackItem * items;
     size_t capacity;
     size_t count;
+    //unsigned item_size;
+    StackItem * items;
 } * PStack;
 
 static void stack_set_capacity(const PStack stack, const size_t capacity) {
@@ -85,7 +86,7 @@ static StackItem * stack_to_array(const PStack stack) {
     return items;
 }
 
-PStack_Behaviour Stack(void) {
+inline PStack_Behaviour Stack(void) {
     static struct Stack_Behaviour const behaviour = {
         .new = stack_new,
         .free = stack_free,

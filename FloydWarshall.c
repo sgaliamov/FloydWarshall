@@ -5,11 +5,11 @@
 
 
 const GraphNodeType UNDEFINED_GRAPH_NODE = UINT_MAX;
-const GraphDistance INFINITY_GRAPH_DISTANCE = INT_MAX;
+const GraphDistanceType INFINITY_GRAPH_DISTANCE = INT_MAX;
 const char * const NAN_STRING = "NAN";
 
 typedef struct FloydWarshallData {
-    GraphDistance **dist;
+    GraphDistanceType **dist;
     GraphNodeType **next;
     GraphNodeType size;
 } * PFloydWarshallData;
@@ -17,11 +17,11 @@ typedef struct FloydWarshallData {
 static PFloydWarshallData _fw_create(const GraphNodeType size) {
     PFloydWarshallData data = malloc(sizeof (struct FloydWarshallData));
     data->size = size;
-    data->dist = malloc(size * sizeof (GraphDistance*));
+    data->dist = malloc(size * sizeof (GraphDistanceType*));
     data->next = malloc(size * sizeof (GraphNodeType*));
 
     for (GraphNodeType i = 0; i < size; i++) {
-        data->dist[i] = calloc(size, sizeof (GraphDistance));
+        data->dist[i] = calloc(size, sizeof (GraphDistanceType));
         data->next[i] = calloc(size, sizeof (GraphNodeType));
 
         for (GraphNodeType j = 0; j < size; j++) {
@@ -38,7 +38,7 @@ PFloydWarshallData fw_create(
         const size_t length,
         const GraphNodeType * const pFrom,
         const GraphNodeType * const pTo,
-        const GraphDistance * const pDist) {
+        const GraphDistanceType * const pDist) {
     assert(size);
     assert(length);
     assert(pFrom);
@@ -50,7 +50,7 @@ PFloydWarshallData fw_create(
     for (size_t i = 0; i < length; i++) {
         GraphNodeType from = pFrom[i];
         GraphNodeType to = pTo[i];
-        GraphDistance dist = pDist[i];
+        GraphDistanceType dist = pDist[i];
 
         assert(from != UNDEFINED_GRAPH_NODE);
         assert(to != UNDEFINED_GRAPH_NODE);
@@ -80,7 +80,7 @@ void fw_free(PFloydWarshallData * const ppData) {
     *ppData = NULL;
 }
 
-inline static GraphDistance _summ(GraphDistance a, GraphDistance b) {
+inline static GraphDistanceType _summ(GraphDistanceType a, GraphDistanceType b) {
     if (a == INFINITY_GRAPH_DISTANCE || b == INFINITY_GRAPH_DISTANCE) {
         return INFINITY_GRAPH_DISTANCE;
     } else if (a == -INFINITY_GRAPH_DISTANCE || b == -INFINITY_GRAPH_DISTANCE) {
@@ -94,20 +94,20 @@ inline static GraphDistance _summ(GraphDistance a, GraphDistance b) {
         c = -INFINITY_GRAPH_DISTANCE;
     }
 
-    return (GraphDistance) c;
+    return (GraphDistanceType) c;
 }
 
 void fw_build(const PFloydWarshallData data) {
     assert(data);
 
-    GraphDistance * const * const dist = data->dist;
+    GraphDistanceType * const * const dist = data->dist;
     GraphNodeType * const * const next = data->next;
 
     for (GraphNodeType k = 0; k < data->size; k++) {
         for (GraphNodeType i = 0; i < data->size; i++) {
             for (GraphNodeType j = 0; j < data->size; j++) {
 
-                const GraphDistance val = _summ(dist[i][k], dist[k][j]);
+                const GraphDistanceType val = _summ(dist[i][k], dist[k][j]);
                 if (dist[i][j] > val) {
                     dist[i][j] = val;
                     next[i][j] = next[i][k];
@@ -131,7 +131,7 @@ GraphNodeType fw_get_next(const PFloydWarshallData data, const GraphNodeType fro
     return data->next[from][to];
 }
 
-GraphDistance fw_get_dist(const PFloydWarshallData data, const GraphNodeType from, const GraphNodeType to) {
+GraphDistanceType fw_get_dist(const PFloydWarshallData data, const GraphNodeType from, const GraphNodeType to) {
     assert(data);
     assert(data->size > from);
     assert(data->size > to);

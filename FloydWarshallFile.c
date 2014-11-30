@@ -26,32 +26,32 @@ inline static void _stack_free(PStack * const stack) {
 PFloydWarshallData fw_load_graph(const char * const path) {
     assert(path);
 
-    PStack stackFrom __attribute__((cleanup(_stack_free))) = Stack()->new();
-    PStack stackTo __attribute__((cleanup(_stack_free))) = Stack()->new();
-    PStack stackDist __attribute__((cleanup(_stack_free))) = Stack()->new();
+    PStack stackFrom __attribute__((cleanup(_stack_free))) = Stack()->new(sizeof (GraphNodeType));
+    PStack stackTo __attribute__((cleanup(_stack_free))) = Stack()->new(sizeof (GraphNodeType));
+    PStack stackDist __attribute__((cleanup(_stack_free))) = Stack()->new(sizeof (GraphDistanceType));
     FILE * pFile __attribute__((cleanup(_close_file))) = fopen(path, "r");
     assert(pFile);
 
     GraphNodeType from = 0;
     GraphNodeType to = 0;
-    GraphNodeType distance = 0;
+    GraphDistanceType distance = 0;
     GraphNodeType max = 0;
     char line[BUFFER_SIZE];
     memset(line, 0, BUFFER_SIZE);
 
     while (fgets(line, BUFFER_SIZE, pFile) != NULL) {
-        sscanf(line, "%u\t%u\t%i", (unsigned*) &from, (unsigned*) &to, (int*) &distance);
+        sscanf(line, "%u\t%u\t%i", &from, &to, &distance);
         memset(line, 0, BUFFER_SIZE);
 
-        Stack()->push(stackFrom, (StackItem) from);
-        Stack()->push(stackTo, (StackItem) to);
-        Stack()->push(stackDist, (StackItem) distance);
+        Stack()->push(stackFrom, &from);
+        Stack()->push(stackTo, &to);
+        Stack()->push(stackDist, &distance);
         max = _max(max, _max(from, to));
     }
 
     const GraphNodeType * const pFrom = (const GraphNodeType * const) Stack()->to_array(stackFrom);
     const GraphNodeType * const pTo = (const GraphNodeType * const) Stack()->to_array(stackTo);
-    const GraphDistance * const pDist = (const GraphDistance * const) Stack()->to_array(stackDist);
+    const GraphDistanceType * const pDist = (const GraphDistanceType * const) Stack()->to_array(stackDist);
     size_t length = Stack()->get_count(stackFrom);
 
     return fw_create(max + 1, length, pFrom, pTo, pDist);
@@ -66,7 +66,7 @@ static void _node_to_string(const GraphNodeType * const node, char * const buffe
     }
 }
 
-static void _distance_to_string(const GraphDistance * const dist, char * const buffer_out) {
+static void _distance_to_string(const GraphDistanceType * const dist, char * const buffer_out) {
     memset(buffer_out, 0, BUFFER_SIZE);
     if (*dist >= INFINITY_GRAPH_DISTANCE || *dist <= -INFINITY_GRAPH_DISTANCE) {
         sprintf(buffer_out, "(%s)", NAN_STRING);
@@ -89,7 +89,7 @@ void fw_save_matix(PFloydWarshallData data, const char * const path) {
     for (GraphNodeType r = 0; r < size; r++) {
         for (GraphNodeType c = 0; c < size; c++) {
             GraphNodeType next = fw_get_next(data, r, c);
-            GraphDistance dist = fw_get_dist(data, r, c);
+            GraphDistanceType dist = fw_get_dist(data, r, c);
 
             _node_to_string(&next, nodeString);
             _distance_to_string(&dist, distString);

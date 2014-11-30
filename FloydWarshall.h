@@ -8,12 +8,12 @@ extern "C" {
 
     typedef struct FloydWarshallData * PFloydWarshallData;
     typedef unsigned GraphNodeType;
-    typedef int GraphDistance;
+    typedef int GraphDistanceType;
 
 
     extern const char * const NAN_STRING;
     extern const GraphNodeType UNDEFINED_GRAPH_NODE;
-    extern const GraphDistance INFINITY_GRAPH_DISTANCE;
+    extern const GraphDistanceType INFINITY_GRAPH_DISTANCE;
 
 
     PFloydWarshallData fw_create(
@@ -21,14 +21,14 @@ extern "C" {
             const size_t,
             const GraphNodeType * const,
             const GraphNodeType * const,
-            const GraphDistance * const);
+            const GraphDistanceType * const);
     void fw_free(PFloydWarshallData * const);
 
     void fw_build(const PFloydWarshallData);
     GraphNodeType fw_size(const PFloydWarshallData);
     GraphNodeType fw_get_next(const PFloydWarshallData, const GraphNodeType, const GraphNodeType);
-    GraphDistance fw_get_dist(const PFloydWarshallData, const GraphNodeType, const GraphNodeType);
-    
+    GraphDistanceType fw_get_dist(const PFloydWarshallData, const GraphNodeType, const GraphNodeType);
+
 
 #ifdef	__cplusplus
 }
